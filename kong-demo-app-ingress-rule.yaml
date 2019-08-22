@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: demo
+  annotations:
+    kubernetes.io/ingress.class: kong
+    plugins.konghq.com: http-auth
+spec:
+  rules:
+  - host: api.yphanikumar.xyz
+    http:
+      paths:
+      - path: /*
+        backend:
+          serviceName: echo
+          servicePort: 80
