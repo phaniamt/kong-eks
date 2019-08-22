@@ -379,14 +379,6 @@
       name: kong-proxy
       namespace: kong
       annotations:
-        # Cloud-provider specific annotations
-        # GKE
-        # GKE creates a L4 LB for any service of type LoadBalancer
-        # TODO figure out how to enable Proxy Protocol on an L4 LB for GKE
-        # AWS
-        # Use NLB over ELB
-    #    service.beta.kubernetes.io/aws-load-balancer-type: nlb
-        # Use L4 LB so that Kong can do TLS termination
         service.beta.kubernetes.io/aws-load-balancer-backend-protocol: tcp
         service.beta.kubernetes.io/aws-load-balancer-ssl-cert: "arn:aws:acm:eu-central-1:294387193228:certificate/ed86172e-ffda-46e0-881e-b2bdea07501d"
         # Enable Proxy Protocol when Kong is listening for proxy-protocol
