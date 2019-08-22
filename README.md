@@ -1,10 +1,10 @@
 # kong-eks
 
- Ref: https://github.com/Kong/kubernetes-ingress-controller/blob/master/docs/deployment/minikube.md
- Ref: https://github.com/Kong/kubernetes-ingress-controller/blob/master/docs/guides/getting-started.md
- Ref: https://blog.baeke.info/2019/06/15/api-management-with-kong-ingress-controller-on-kubernetes/
- Ref: https://raw.githubusercontent.com/Kong/kubernetes-ingress-controller/master/deploy/single/all-in-one-postgres.yaml
- Ref: https://gist.githubusercontent.com/lalyos/4553081032b1f75eb18e66788a76d2a2/raw/k8s-echo-server.yaml
+ # Ref: https://github.com/Kong/kubernetes-ingress-controller/blob/master/docs/deployment/minikube.md
+ # Ref: https://github.com/Kong/kubernetes-ingress-controller/blob/master/docs/guides/getting-started.md
+ # Ref: https://blog.baeke.info/2019/06/15/api-management-with-kong-ingress-controller-on-kubernetes/
+ # Ref: https://raw.githubusercontent.com/Kong/kubernetes-ingress-controller/master/deploy/single/all-in-one-postgres.yaml
+ # Ref: https://gist.githubusercontent.com/lalyos/4553081032b1f75eb18e66788a76d2a2/raw/k8s-echo-server.yaml
 
 # Create Kong Namespace
     apiVersion: v1
