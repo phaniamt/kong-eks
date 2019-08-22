@@ -9,6 +9,8 @@
  #Ref: https://raw.githubusercontent.com/Kong/kubernetes-ingress-controller/master/deploy/single/all-in-one-postgres.yaml
  
  #Ref: https://gist.githubusercontent.com/lalyos/4553081032b1f75eb18e66788a76d2a2/raw/k8s-echo-server.yaml
+ 
+ #Ref: https://github.com/phaniamt/ssl-redirect/blob/master/README.md
 
 # Create Kong Namespace
     apiVersion: v1
