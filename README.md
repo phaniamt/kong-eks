@@ -391,7 +391,6 @@
       - name: kong-proxy
         port: 80
         targetPort: 80
-    #    protocol: TCP
       - name: kong-proxy-ssl
         port: 443
         targetPort: 8000
