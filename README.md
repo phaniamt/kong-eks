@@ -697,4 +697,103 @@
             ports:
             - name: nginx
               containerPort: 80
-
+# Deploy a Demo application
+    apiVersion: v1
+    kind: Service
+    metadata:
+      labels:
+        app: echo
+      name: echo
+    spec:
+      ports:
+      - port: 8080
+        name: high
+        protocol: TCP
+        targetPort: 8080
+      - port: 80
+        name: low
+        protocol: TCP
+        targetPort: 8080
+      selector:
+        app: echo
+    ---
+    apiVersion: apps/v1beta1
+    kind: Deployment
+    metadata:
+      labels:
+        app: echo
+      name: echo
+    spec:
+      replicas: 4
+      selector:
+        matchLabels:
+          app: echo
+      strategy: {}
+      template:
+        metadata:
+          creationTimestamp: null
+          labels:
+            app: echo
+        spec:
+          containers:
+          - image: gcr.io/kubernetes-e2e-test-images/echoserver:2.2
+            name: echo
+            ports:
+            - containerPort: 8080
+            env:
+              - name: NODE_NAME
+                valueFrom:
+                  fieldRef:
+                    fieldPath: spec.nodeName
+              - name: POD_NAME
+                valueFrom:
+                  fieldRef:
+                    fieldPath: metadata.name
+          - name: POD_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+          - name: POD_IP
+            valueFrom:
+              fieldRef:
+                fieldPath: status.podIP
+        resources: {}
+# Create a kong consumer
+    apiVersion: configuration.konghq.com/v1
+    kind: KongConsumer
+    metadata:
+      name: top
+    username: topuser 
+# Create a KongCredential for topuser
+    apiVersion: configuration.konghq.com/v1
+    kind: KongCredential
+    metadata:
+      name: topcred
+    consumerRef: top
+    type: key-auth
+    config:
+      key: yourverysecretkeyhere
+ # Create a KongPlugin for key-authentication
+    apiVersion: configuration.konghq.com/v1
+    kind: KongPlugin
+    metadata:
+      name: http-auth
+      namespace: default
+    plugin: key-auth 
+ # Create a ingress rule for Demo application
+    apiVersion: extensions/v1beta1
+    kind: Ingress
+    metadata:
+      name: demo
+      annotations:
+        kubernetes.io/ingress.class: kong
+        plugins.konghq.com: http-auth
+    spec:
+      rules:
+      - host: api.yphanikumar.xyz
+        http:
+          paths:
+          - path: /*
+            backend:
+              serviceName: echo
+              servicePort: 80
